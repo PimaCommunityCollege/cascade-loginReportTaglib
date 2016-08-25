@@ -90,8 +90,19 @@ public class LoginReportHelper
 				{									
 					log.info("an unsafe username was blocked from results.  You can find the original value in the cxml_audit table.  A sanitized version of the username, which may be different from the original, is: " + user.replaceAll("[^\\w]", "_"));
 					user = BLOCKED_USERNAME;
+					try
+					{
+						logins.put(user, count + logins.get(user));
+					}
+					catch(Exception e)	// not found
+					{
+						logins.put(user, count);
+					}
 				}
-				logins.put(user,  count);
+				else
+				{
+					logins.put(user,  count);
+				}
 			}
 		}
 		catch(SQLException e)

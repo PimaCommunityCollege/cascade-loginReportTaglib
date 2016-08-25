@@ -9,7 +9,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class DrawLoginsTag extends SimpleTagSupport {
-	private String days = "";
+	private int days = 0;
 	private String wantFailed = "";
 
 	////////////////////////////////////////////////////
@@ -17,15 +17,14 @@ public class DrawLoginsTag extends SimpleTagSupport {
 	public void doTag() throws JspException, IOException
 	{
 		boolean fail = LoginReportHelper.parseWantFails(wantFailed);
-		int d = LoginReportHelper.parseDays(days);
 		
-		TreeMap<String, Integer> logins = LoginReportHelper.loginQuery(fail, d);
+		TreeMap<String, Integer> logins = LoginReportHelper.loginQuery(fail, days);
 		
 		JspWriter out = getJspContext().getOut();
 		
 		out.println("<table>");
 		out.print("<caption>");
-		out.print((fail ? "Failed" : "Successful") + " logins for the last " + d + " days");
+		out.print((fail ? "Failed" : "Successful") + " logins for the last " + days + " days");
 		out.println("</caption>");
 		out.println("<thead>");
 		out.println("<th>Username</th>");
@@ -59,12 +58,12 @@ public class DrawLoginsTag extends SimpleTagSupport {
 	
 	////////////////////////////////////////////////////////
 	
-	public String getDays() {
+	public int getDays() {
 		return days;
 	}
 
-	public void setDays(String days) {
-		this.days = days;
+	public void setDays(int d) {
+		this.days = d;
 	}
 
 	public String getWantFailed() {
