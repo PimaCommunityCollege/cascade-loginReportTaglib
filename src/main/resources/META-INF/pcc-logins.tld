@@ -22,16 +22,6 @@
 			<elexprvalue>true</elexprvalue>
 		</attribute>
 	</tag>
-	<tag>
-		<name>safeDays</name>
-		<tag-class>edu.pima.cascade.loginReport.SafeDaysTag</tag-class>
-		<body-content>empty</body-content>
-		<attribute>
-			<name>days</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<elexprvalue>true</elexprvalue>
-		</attribute>
-	</tag>
+	
 </taglib>
 
